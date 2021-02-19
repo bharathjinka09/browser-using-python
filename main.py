@@ -1,15 +1,20 @@
-import sys
+import sys,os
+from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtWebEngineWidgets import *
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon
 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.browser = QWebEngineView()
-        self.browser.setUrl(QUrl('http://google.com'))
+        self.browser.setUrl(QUrl('https://google.com'))
         self.setCentralWidget(self.browser)
+        scriptDir = os.path.dirname(os.path.realpath(__file__))
+        self.setWindowIcon(QtGui.QIcon(scriptDir + os.path.sep + 'browser_alt.png'))
         self.showMaximized()
 
         # navbar
@@ -39,7 +44,7 @@ class MainWindow(QMainWindow):
         self.browser.urlChanged.connect(self.update_url)
 
     def navigate_home(self):
-        self.browser.setUrl(QUrl('https://bharathjinka09.github.io'))
+        self.browser.setUrl(QUrl('https://google.com'))
 
     def navigate_to_url(self):
         url = self.url_bar.text()
